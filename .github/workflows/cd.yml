@@ -37,7 +37,7 @@ jobs:
         run: |
           pwd
           ls
-          cd ./target/azure-functions
+          cd ./target/azure-functions/function-app-1690632195073
           ls
       - name: deploy to azure
         uses: Azure/functions-action@v1
