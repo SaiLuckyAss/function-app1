@@ -46,7 +46,7 @@ jobs:
           package: '.'
           publish-profile: ${{secrets.publish_profile_function_app_1690632195073}}
           respect-pom-xml: true
-        if: false
-          
+
+       
           
           
