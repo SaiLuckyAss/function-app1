@@ -27,6 +27,12 @@ jobs:
           pwd
           ls
         shell: bash
+      - name: code quality
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_SAML_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.branch.name=main -Dsonar.projectKey=SaiLuckyAss_function-app1 -f ./pom.xml
+
       - name: Archive artifact
         uses: actions/upload-artifact@v3
         with: 
@@ -46,6 +52,7 @@ jobs:
           package: '.'
           publish-profile: ${{secrets.publish_profile_function_app_1690632195073}}
           respect-pom-xml: true
+        if: false
 
        
           
