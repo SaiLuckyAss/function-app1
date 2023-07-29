@@ -10,6 +10,8 @@
     <name>Azure Java Functions</name>
 
     <properties>
+  <sonar.organization>sailucky</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <azure.functions.maven.plugin.version>1.26.0</azure.functions.maven.plugin.version>
