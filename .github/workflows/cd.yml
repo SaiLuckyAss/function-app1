@@ -1,0 +1,45 @@
+name: deply azure function
+on: [workflow_dispatch]
+jobs:
+  Build_And_Deploy:
+    name: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: setup java
+        uses: actions/setup-java@v3.9.0
+        with:
+          java-version: 11
+          distribution: 'adopt'
+      - name: build using maven
+        run: |
+          mvn clean install -f ./pom.xml -s ./nexus.xml
+          mvn test -f ./pom.xml -s ./nexus.xml
+        shell: bash
+      - name: Restore project dependencies using maven
+        run: |
+          pushd ./
+          mvn azure-functions:package
+        shell: bash
+      - name: Echo dirs
+        run: |
+          pwd
+          ls
+        shell: bash
+      - name: Archive artifact
+        uses: actions/upload-artifact@v3
+        with: 
+          name: function-app-10
+          path: './target/azure-functions/function-app-1690632195073/'
+          retention-days: 2
+      - name: deploy to azure
+        uses: Azure/functions-action@v1
+        with:
+          app-name: Function-App-1690551121763
+          package: '.'
+          publish-profile: ${{secrets.publish_profile_function_app_1690632195073}}
+          respect-pom-xml: true
+          
+          
+          
