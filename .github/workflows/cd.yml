@@ -45,7 +45,7 @@ jobs:
           ls
       - name: inside target
         run: |
-          cd ./target/azure-functions
+          cd ./target/azure-functions/function-app-1690632195073
           ls
         shell: bash
       - name: deploy to azure
