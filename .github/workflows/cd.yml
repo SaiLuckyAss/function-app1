@@ -53,6 +53,16 @@ jobs:
           publish-profile: ${{secrets.publish_profile_function_app_1690632195073}}
           respect-pom-xml: true
         if: false
+      - name: download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: function-app-10
+          path: ./
+      - name: "List"
+        run: |
+          ls -lrt
+        shell: bash
+      
 
        
           
