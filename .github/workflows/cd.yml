@@ -43,8 +43,11 @@ jobs:
         run: |
           pwd
           ls
+      - name: inside target
+        run: |
           cd ./target/azure-functions
           ls
+        shell: bash
       - name: deploy to azure
         uses: Azure/functions-action@v1
         with:
