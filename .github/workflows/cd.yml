@@ -14,7 +14,7 @@ jobs:
           distribution: 'adopt'
       - name: build using maven
         run: |
-          mvn clean install -f ./pom.xml -s ./nexus.xml
+          mvn clean install -f ./pom.xml -s .//
           mvn test -f ./pom.xml -s .//
         shell: bash
       - name: Restore project dependencies using maven
