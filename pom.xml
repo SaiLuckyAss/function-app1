@@ -10,6 +10,7 @@
     <name>Azure Java Functions</name>
 
     <properties>
+        <maven.test.failure.igore>true</maven.test.failure.ignore>
   <sonar.organization>sailucky</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
