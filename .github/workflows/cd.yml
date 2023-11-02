@@ -9,6 +9,8 @@ jobs:
         run: |
           log=$(curl -s -u 2c0722a051f981cd79772a0255820813b4037bf2: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=SaiLuckyAss_function-app1" | jq '.projectStatus.conditions')
           echo "Logs $log "
+      - name: checkout
+        uses: actions/checkout@v1
       - name: raise pr
         uses: repo-sync/pull-request@v2
         with:
@@ -17,8 +19,7 @@ jobs:
           pr_title: "title"
           pr_body: "body"
       
-      - name: checkout
-        uses: actions/checkout@v1
+
       - name: setup java
         uses: actions/setup-java@v3.9.0
         with:
