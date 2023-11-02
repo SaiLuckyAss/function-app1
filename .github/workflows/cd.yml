@@ -8,7 +8,17 @@ jobs:
       - name: QG Status
         run: |
           log=$(curl -s -u 2c0722a051f981cd79772a0255820813b4037bf2: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=SaiLuckyAss_function-app1" | jq '.projectStatus.conditions')
-          echo "$logs"
+          conditions=$(echo "$log" | jq '.projectStatus.conditions')
+          for condition in $(echo "$conditions" | jq -c '.[]'); do
+            status=$(echo "$condition" | jq -r '.status')
+            metricKey=$(echo "$condition" | jq -r '.metricKey')
+            comparator=$(echo "$condition" | jq -r '.comparator')
+            errorThreshold=$(echo "$condition" | jq -r '.errorThreshold')
+            actualValue=$(echo "$condition" | jq -r '.actualValue')
+
+          echo "Status: $status, Metric Key: $metricKey, Comparator: $comparator, Error Threshold: $errorThreshold, Actual Value: $actualValue"
+done
+
       - name: checkout
         uses: actions/checkout@v1
       - name: setup java
