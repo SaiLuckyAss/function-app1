@@ -17,7 +17,7 @@ jobs:
             actualValue=$(echo "$condition" | jq -r '.actualValue')
 
           echo "Status: $status, Metric Key: $metricKey, Comparator: $comparator, Error Threshold: $errorThreshold, Actual Value: $actualValue"
-done
+          done
 
       - name: checkout
         uses: actions/checkout@v1
