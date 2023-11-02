@@ -8,7 +8,7 @@ jobs:
       - name: QG Status
         run: |
           log=$(curl -s -u 2c0722a051f981cd79772a0255820813b4037bf2: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=SaiLuckyAss_function-app1" | jq '.projectStatus.conditions')
-          echo "Logs $logs "
+          echo "Logs $log "
 
       - name: checkout
         uses: actions/checkout@v1
