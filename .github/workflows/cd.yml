@@ -31,7 +31,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_SAML_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.branch.name=main -Dsonar.projectKey=SaiLuckyAss_function-app1 -f ./pom.xml
+        run: |
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.branch.name=main -Dsonar.projectKey=SaiLuckyAss_function-app1 -f ./pom.xml
+          log=${curl -s -u '${env.SONAR_TOKEN}':"https://sonarcloud.io/api/qualitygates/project_status?projectKey=SaiLuckyAss_function-app1" | jq '.projectStatus.conditions' }
+          echo "$logs"
       - name: Archive artifact
         uses: actions/upload-artifact@v3
         with: 
