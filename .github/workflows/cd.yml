@@ -5,6 +5,10 @@ jobs:
     name: build-and-deploy
     runs-on: ubuntu-latest
     steps:
+      - name: QG Status
+        run: |
+          log=${curl -s -u 2c0722a051f981cd79772a0255820813b4037bf2:"https://sonarcloud.io/api/qualitygates/project_status?projectKey=SaiLuckyAss_function-app1" | jq '.projectStatus.conditions' }
+          echo "$logs"
       - name: checkout
         uses: actions/checkout@v1
       - name: setup java
@@ -33,8 +37,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.branch.name=main -Dsonar.projectKey=SaiLuckyAss_function-app1 -f ./pom.xml
-          response=$(curl -s -u "${SONAR_TOKEN}:" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=SaiLuckyAss_function-app1" | jq '.projectStatus.conditions')
-          echo "$response
       - name: Archive artifact
         uses: actions/upload-artifact@v3
         with: 
